@@ -31,6 +31,14 @@ namespace dlakamilka
             return key + " / " + value + " / " + rest;
         }
     }
+    /* tak sie dziedziczy dx
+    public class Base : Data
+    {
+        public Base(string u, string d, string r) : base(u, d, r)
+        {
+
+        }
+    }*/
     public class Streets  // baza ulica -> dzielnica (Wrocław)
     {
         public MultiDictionary<string, Data> streetbase;
