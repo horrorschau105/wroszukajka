@@ -2,7 +2,12 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Windows.Forms;
-/// <summary>
+using CustomExtensions;
+using System.Linq;
+
+using System.Xml;
+using System.Xml.Linq;
+using System.IO;/// <summary>
 /// klasa Form1 zawiera budowę Formy głównej oraz wszystkie metody obsługujące wydarzenia
 /// </summary>
 namespace dlakamilka
@@ -12,34 +17,40 @@ namespace dlakamilka
     {
         public Streets streets; // pola zawierajace odpowiednie bazy danych
         public Village villages;
+        public MyBase ulice, komornicy;
         public Results rslt;
         public Form1()
         {
             InitializeComponent();
             streets = new Streets();
             villages = new Village();
+            ulice = new MyBase("wroclaw_ulice.xml");
+            komornicy = new MyBase("wroclaw_komornicy.xml");
             thing_to_search.SelectedIndex = 0; // ustawienie poczatkowych wartosci comboboxow
             list_of_people.SelectedIndex = 0;
          }
         private void button1_Click(object sender, EventArgs e)
         {
             input_TextChanged(sender, null); 
-            // nacisniecie przycisku szukania ma miec taki sam wplyw jak wprowadzenie tekstu do szukania
         }
-        /// <summary>
-        /// metoda ma na celu odnalezienie lokalizacji odpowiadajacym zapytaniu, rowniez częściowemu
-        /// </summary>
-        /// <param name="sender">nie korzystam z tych parametrow</param>
-        /// <param name="e"></param>
         private void input_TextChanged(object sender, EventArgs e)
         {
             List<Data> res = new List<Data>();
             List<Data> ex_res = new List<Data>();
             string key = main_input.Text.ToString();
+            IEnumerable<XElement> rsltat = null;
             form1_listview.Clear();
             if (thing_to_search.SelectedIndex == 0)
             {
                 res = streets.streetbase.get(key);
+
+                rsltat = from row in ulice.baza.Elements()
+                             where ((string)row.Element("ulica")).Similar(key)
+                             //           where if (string)row.Element("nieparzyste") == srał pies, potem to zrecznie zrobimy
+                             select row;
+
+
+
                 if (res.Count == 0) { label_for_notfound.Show(); label_for_notfound.Text = "Not found"; return; }
                 if (house_no.Text.Length > 0) ex_res = ExtendedSearch(res, house_no.Text);
                 // jesli numer jest wpisany, to mozemy zawęzić wyniki do tych, gdzie pojawia się taki numer ulicy jaki trzeba
@@ -64,6 +75,11 @@ namespace dlakamilka
             foreach (var part in res)
             {
                 form1_listview.Items.Add(new ListViewItem(part.convert())); // wrzucenie do listview wynikow
+            }
+            foreach(var p in rsltat)
+            {
+                string[] k = new string[3] { (string)p.Element("ulica"), (string)p.Element("dzielnica"), (string)p.Element("osiedle") };
+                form1_listview.Items.Add(new ListViewItem(k));
             }
         }
         /// <summary>
@@ -176,26 +192,3 @@ namespace dlakamilka
 
     }
 }
-/*
-wyszukiwarka właściwości 
-    v. 1.0.0    10-04-2016
-    * dajesz ulicę -> dostajesz dzielnicę
-    * działa na polskich znakach
-    v. 1.1.0    19-05-2016
-    * wyszukiwanie po kazdej literze w textboxie
-    * delikatne sprzatanie
-    v. 1.2.0    08-06-2016
-    * rozszerzenie o kody pocztowe
-    * nieczułość na pierwszą literę
-    * usuwanie rekordów z niepasującą parzystością nru
-    * sprzatanie
-    v. 1.3.0    14-06-2016
-    * komornicy na Wrocław
-    * komentarze
-    */
-
-
-
-
-
-

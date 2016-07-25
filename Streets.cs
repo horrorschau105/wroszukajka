@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
 using System.IO;
 /// <summary>
 /// plik zawierający wszystkie klasy zawierająca odpowiednie bazy danych
@@ -11,6 +13,22 @@ using System.IO;
 /// </summary>
 namespace dlakamilka
 {
+    public class MyBase
+    {
+        public XElement baza;
+        public MyBase(string path)
+        {
+            try
+            {
+                baza = XElement.Load(path);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+                Environment.Exit(-16);
+            }
+        }
+    }
     public class Data /// klasa symulująca krotkę
     {
         public string key;

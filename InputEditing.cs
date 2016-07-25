@@ -21,6 +21,18 @@ namespace CustomExtensions
             }
             return newstr;
         }
+        public static bool Similar(this String pot, string key)
+        {
+            int count, it;
+            count = it = 0;
+            while (it < pot.Length && it < key.Length && pot[it] == key[it])
+            {
+                count++;
+                it++;
+            }
+            return (count >= key.Length * 0.7);
+            
+        }
     }
     public static class CharExtension
     {
