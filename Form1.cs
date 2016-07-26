@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using CustomExtensions;
 using System.Linq;
-
-using System.Xml;
 using System.Xml.Linq;
-using System.IO;/// <summary>
+/// <summary>
 /// klasa Form1 zawiera budowę Formy głównej oraz wszystkie metody obsługujące wydarzenia
 /// </summary>
 namespace dlakamilka

@@ -6,13 +6,13 @@ namespace CustomExtensions
 {
     public static class StringExtension
     {
-        public static bool IsNullOrEmpty(this String str)
+        public static bool IsNullOrEmpty(this string str)
         {
             if(str == null) return true;
             if(str == "") return true;
             return false;
         }
-        public static string FirstLetterUp(this String str) // daje pierwsza litere wieksza, o ile na wejsciu jest faktycznie ciag znakow
+        public static string FirstLetterUp(this string str) // daje pierwsza litere wieksza, o ile na wejsciu jest faktycznie ciag znakow
         {
             if (str.IsNullOrEmpty()) return "";
             foreach (var letter in str)
@@ -28,7 +28,7 @@ namespace CustomExtensions
             }
             return newstr;
         }
-        public static bool Similar(this String pot, string key)
+        public static bool Similar(this string pot, string key)
         {
             if (pot.IsNullOrEmpty()) return false; // no cóż...
             key = key.FirstLetterUp(); // tolerancja dla małej litery sprzodu ulicy
