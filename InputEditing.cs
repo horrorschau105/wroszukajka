@@ -23,6 +23,8 @@ namespace CustomExtensions
         }
         public static bool Similar(this String pot, string key)
         {
+            if (pot == null) return false; // no cóż...
+            key = key.FirstLetterUp(); // tolerancja dla małej litery sprzodu ulicy
             int count, it;
             count = it = 0;
             while (it < pot.Length && it < key.Length && pot[it] == key[it])
@@ -32,6 +34,13 @@ namespace CustomExtensions
             }
             return (count >= key.Length * 0.7);
             
+        }
+        public static bool FindHouse(string no, string odd, string even)
+        {
+        if (no == null) return true;
+        if (no[0] % 2 == 0 && even != "n") return true;
+        else if (no[0] % 2 == 1 && odd != "n") return true;
+        return false;
         }
     }
     public static class CharExtension
