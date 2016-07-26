@@ -45,8 +45,8 @@ namespace dlakamilka
                 res = streets.streetbase.get(key);
 
                 rsltat = from row in ulice.baza.Elements()
-                             where ((string)row.Element("ulica")).Similar(key)
-                             //           where if (string)row.Element("nieparzyste") == srał pies, potem to zrecznie zrobimy
+                             where ((string)row.Element("ulica")).Similar(key) //&&
+                            // StringExtension.FindHouse(house_no.Text, (string)row.Element("nieparzyste"), (string)row.Element("parzyste"))
                              select row;
 
 
@@ -57,8 +57,8 @@ namespace dlakamilka
                 if (ex_res.Count > 0) res = ex_res; // jak numerem zabijemy wszystko, to lepiej zostawic to co bylo
                 form1_listview.View = View.Details; // ustawiamy wlasciwy widok w listview
                 form1_listview.Columns.Add("Ulica", form1_listview.Width / 6, HorizontalAlignment.Center);
-                form1_listview.Columns.Add("Dzielnica", form1_listview.Width / 3, HorizontalAlignment.Center);
-                form1_listview.Columns.Add("Reszta", form1_listview.Width / 2, HorizontalAlignment.Center);
+                form1_listview.Columns.Add("Osiedle", form1_listview.Width / 3, HorizontalAlignment.Center);
+                form1_listview.Columns.Add("Dzielnica", form1_listview.Width / 2, HorizontalAlignment.Center);
             }
             if (thing_to_search.SelectedIndex == 1)
             {
@@ -78,7 +78,7 @@ namespace dlakamilka
             }
             foreach(var p in rsltat)
             {
-                string[] k = new string[3] { (string)p.Element("ulica"), (string)p.Element("dzielnica"), (string)p.Element("osiedle") };
+                string[] k = new string[3] { (string)p.Element("nazwa_ulicy"), (string)p.Element("dzielnica"), (string)p.Element("osiedle") };
                 form1_listview.Items.Add(new ListViewItem(k));
             }
         }
