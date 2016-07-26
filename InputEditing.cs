@@ -6,8 +6,15 @@ namespace CustomExtensions
 {
     public static class StringExtension
     {
+        public static bool IsNullOrEmpty(this String str)
+        {
+            if(str == null) return true;
+            if(str == "") return true;
+            return false;
+        }
         public static string FirstLetterUp(this String str) // daje pierwsza litere wieksza, o ile na wejsciu jest faktycznie ciag znakow
         {
+            if (str.IsNullOrEmpty()) return "";
             foreach (var letter in str)
             {
                 if (!letter.isLetter()) return str;
@@ -23,7 +30,7 @@ namespace CustomExtensions
         }
         public static bool Similar(this String pot, string key)
         {
-            if (pot == null) return false; // no cóż...
+            if (pot.IsNullOrEmpty()) return false; // no cóż...
             key = key.FirstLetterUp(); // tolerancja dla małej litery sprzodu ulicy
             int count, it;
             count = it = 0;
@@ -37,7 +44,7 @@ namespace CustomExtensions
         }
         public static bool FindHouse(string no, string odd, string even)
         {
-        if (no == null || no == "") return true;
+        if (no.IsNullOrEmpty()) return true;
         if (no[0] % 2 == 0 && even != "n") return true;
         else if (no[0] % 2 == 1 && odd != "n") return true;
         return false;
