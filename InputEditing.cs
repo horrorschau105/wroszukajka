@@ -1,7 +1,4 @@
-﻿using System;
-/// <summary>
-/// klasa zawierająca metodę rozszerzającą klasę standardową string i char
-/// </summary>
+﻿using System.Windows.Forms;
 namespace CustomExtensions
 {
     public static class StringExtension
@@ -57,6 +54,17 @@ namespace CustomExtensions
             if (64 < c && c < 92) return true;
             if (96 < c && c < 124) return true;
             return false;
+        }
+    }
+    public static class ListViewExtension
+    {
+        public static void AddManyColumns(ListView listview, params string[] columns)
+        {
+            listview.View = View.Details;
+            foreach (string col in columns)
+            {
+                listview.Columns.Add(col, listview.Width / columns.Length, HorizontalAlignment.Center);
+            }
         }
     }
 }
