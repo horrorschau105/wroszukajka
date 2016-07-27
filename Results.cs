@@ -14,25 +14,11 @@ namespace dlakamilka
 {
     public partial class Results : Form
     {
-        Komornicy_Wroclaw k_wr;// jeden z wyswietlanych typow
+        public MyBase komornicy;
         public Results()
         {
             InitializeComponent();
-            k_wr = new Komornicy_Wroclaw();
-            this.Name = "Lista komorników";
-            
-        }
-        public void ShowData(Set set) // na podstawie zbioru dzielnic ustalamy liste komornikow do pokazania
-        {
-            List<string> toPaste = new List<string>();
-            foreach(string it in set)
-            {
-                toPaste.AddRange(k_wr.dbase.get(it));
-            }
-            foreach (string data in toPaste)
-            {
-                listViewOfResults.Items.Add(data);
-            }
+            komornicy = new MyBase("wroclaw_komornicy.xml");
         }
     }
 }

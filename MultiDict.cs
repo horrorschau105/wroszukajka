@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using CustomExtensions;
-using System.Windows.Forms;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 /// <summary>
 /// slownik przerobiony na multislownik, pozwalajacy trzymac wiele elementów o tym samym kluczu
 /// nadpisane metody: Add i Get
