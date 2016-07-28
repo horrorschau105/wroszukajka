@@ -10,6 +10,7 @@ namespace dlakamilka
     {
         public MyBase ulice;
         public Results rslt;
+        public IEnumerable<XElement> all_answers; // by miec zawsze całą listę z bazą, zamiast poszczególnych kolumn
         public Form1()
         {
             InitializeComponent();
@@ -33,21 +34,22 @@ namespace dlakamilka
                          where ((string)row.Element("nazwa_ulicy")).Similar(key)
                          && StringExtension.FindHouse(house_no.Text, (string)row.Element("nieparzyste"), (string)row.Element("parzyste"))
                          select row;
-                ListViewExtension.AddManyColumns(form1_listview, "Ulica", "Dzielnica", "Osiedle");
+                form1_listview.AddManyColumns("Ulica", "Dzielnica", "Osiedle");
             }
             else if (thing_to_search.SelectedIndex == 1)
             {
-                ListViewExtension.AddManyColumns(form1_listview, "Kod", "Miasto", "Lokalizacja");
+                form1_listview.AddManyColumns("Kod", "Miasto", "Lokalizacja");
                 // cos tu kiedys wrzucimy
              }
             if (!rsltat.Any()) label_for_notfound.Show();
             else label_for_notfound.Hide();
             foreach(var p in rsltat)
             {
-                form1_listview.Items.Add(new ListViewItem(make_table(p, "nazwa_ulicy", "dzielnica", "osiedle")));
+                form1_listview.Items.Add(new ListViewItem(p.GetRowFromNode("nazwa_ulicy", "dzielnica", "osiedle")));
             }
+            all_answers = rsltat;
         }
-        private string[] make_table(XElement p,params string[] list) /// uuuuu, wo seid ihr?
+        private string[] make_table(XElement p, params string[] list) /// uuuuu, wo seid ihr?
         {
             string[] result = new string[list.Length];
             for(int i=0;i<list.Length;++i)
@@ -59,10 +61,9 @@ namespace dlakamilka
        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             if (thing_to_search.SelectedIndex == 0)
-            {
+            {// to boli
                 house_no.Show();
                 main_input.SetBounds(main_input.Location.X, main_input.Location.Y, 190, main_input.Size.Height);
-                // to boli
             }
             if (thing_to_search.SelectedIndex == 1)
             {
@@ -92,15 +93,15 @@ namespace dlakamilka
             rslt = new Results();
             rslt.Show();
             Set set = new Set();
-            foreach (ListViewItem data in form1_listview.Items)
+            foreach (XElement data in all_answers)
             {
                 // Psie pole podlega tutaj pod Fabryczną, a Stare Miasto pod Śródmieście, stąd zmiany
-                if (data.SubItems[1].Text == "Psie Pole") set.Add("Fabryczna");
-                else if (data.SubItems[1].Text == "Stare Miasto") set.Add("Śródmieście");
-                else set.Add(data.SubItems[1].Text);
+                var district = (string)data.Element("dzielnica");
+                if (district == "Psie Pole") set.Add("Fabryczna");
+                else if (district == "Stare Miasto") set.Add("Śródmieście");
+                else set.Add(district);
             }
-            ListViewExtension.
-                AddManyColumns(rslt.listViewOfResults, "Imie", "Nazwisko", "Adres", "Kod pocztowy", "Miasto");
+            rslt.listViewOfResults.AddManyColumns("Imie", "Nazwisko", "Adres", "Kod pocztowy", "Miasto");
             foreach(string district in set)
             {
                 var partial = from row in rslt.komornicy.baza.Elements()
@@ -109,7 +110,7 @@ namespace dlakamilka
                 foreach(XElement x in partial)
                 {
                     rslt.listViewOfResults.Items.
-                        Add(new ListViewItem(make_table(x, "imie", "nazwisko", "adres", "kodpocztowy", "miasto")));
+                        Add(new ListViewItem(x.GetRowFromNode("imie", "nazwisko", "adres", "kodpocztowy", "miasto")));
                 } 
             }
             

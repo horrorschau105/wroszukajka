@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using System.Xml.Linq;
 namespace CustomExtensions
 {
     public static class StringExtension
@@ -58,13 +59,26 @@ namespace CustomExtensions
     }
     public static class ListViewExtension
     {
-        public static void AddManyColumns(ListView listview, params string[] columns)
+        public static void AddManyColumns(this ListView listview, params string[] columns)
         {
             listview.View = View.Details;
             foreach (string col in columns)
             {
                 listview.Columns.Add(col, listview.Width / columns.Length, HorizontalAlignment.Center);
             }
+        }
+        
+    }
+    public static class XElementExtension
+    {
+        public static string[] GetRowFromNode(this XElement xelement, params string[] columns)
+        {
+            string[] result = new string[columns.Length];
+            for (int i = 0; i < columns.Length; ++i)
+            {
+                result[i] = (string)xelement.Element(columns[i]);
+            }
+            return result;
         }
     }
 }
