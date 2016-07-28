@@ -67,7 +67,6 @@ namespace CustomExtensions
                 listview.Columns.Add(col, listview.Width / columns.Length, HorizontalAlignment.Center);
             }
         }
-        
     }
     public static class XElementExtension
     {
