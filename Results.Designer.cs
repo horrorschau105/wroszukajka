@@ -29,21 +29,33 @@
         private void InitializeComponent()
         {
             this.listViewOfResults = new System.Windows.Forms.ListView();
+            this.NameLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listViewOfResults
             // 
-            this.listViewOfResults.Location = new System.Drawing.Point(12, 12);
+            this.listViewOfResults.Location = new System.Drawing.Point(12, 64);
             this.listViewOfResults.Name = "listViewOfResults";
-            this.listViewOfResults.Size = new System.Drawing.Size(514, 237);
+            this.listViewOfResults.Size = new System.Drawing.Size(922, 314);
             this.listViewOfResults.TabIndex = 0;
             this.listViewOfResults.UseCompatibleStateImageBehavior = false;
+            // 
+            // NameLabel
+            // 
+            this.NameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.NameLabel.Location = new System.Drawing.Point(12, 9);
+            this.NameLabel.Name = "NameLabel";
+            this.NameLabel.Size = new System.Drawing.Size(922, 52);
+            this.NameLabel.TabIndex = 1;
+            this.NameLabel.Text = "wut";
+            this.NameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Results
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(541, 261);
+            this.ClientSize = new System.Drawing.Size(946, 390);
+            this.Controls.Add(this.NameLabel);
             this.Controls.Add(this.listViewOfResults);
             this.Name = "Results";
             this.Text = "Results";
@@ -54,5 +66,6 @@
         #endregion
 
         public System.Windows.Forms.ListView listViewOfResults;
+        public System.Windows.Forms.Label NameLabel;
     }
 }

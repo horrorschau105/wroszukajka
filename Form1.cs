@@ -77,6 +77,7 @@ namespace dlakamilka
                 return;
             }
             rslt.Show();
+            rslt.NameLabel.Text = string.Format("Wyniki wyszukiwania {0}", list_of_people.Items[list_of_people.SelectedIndex]);
             switch (list_of_people.SelectedIndex) 
             {
                 case 0: // KOMORNICY
@@ -102,7 +103,26 @@ namespace dlakamilka
                     }
                     break;
                 case 2: // PROKURATURY
-
+                    foreach (XElement data in all_answers)
+                    {
+                        KeyValuePair<string, string> t = 
+                            new KeyValuePair<string, string>((string)data.Element("dzielnica"), (string)data.Element("extend"));
+                        set.Add(t);
+                    }
+                    if (CBoxSpecial.Checked) set.Add(new KeyValuePair<string, string>("None", "None"));
+                    rslt.listViewOfResults.AddManyColumns("Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
+                    foreach (KeyValuePair<string, string> district in set)
+                    {
+                        var partial = from row in rslt.prokuratura.baza.Elements()
+                                      where ((string)row.Element("dzielnica") == district.Key 
+                                            && (string)row.Element("extend") == district.Value) 
+                                      select row;
+                        foreach (XElement x in partial)
+                        {
+                            rslt.listViewOfResults.Items.
+                                Add(new ListViewItem(x.GetRowFromNode("coto", "miasto", "ulica", "kodpocztowy",  "telefon1" , "telefon2")));
+                        }
+                    }
                     break;
                 default:
                     MessageBox.Show("pusto!");

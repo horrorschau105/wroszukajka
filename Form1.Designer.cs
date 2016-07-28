@@ -40,6 +40,7 @@
             this.result_button = new System.Windows.Forms.Button();
             this.Res2 = new System.Windows.Forms.Label();
             this.sady_combo = new System.Windows.Forms.ComboBox();
+            this.CBoxSpecial = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // main_input
@@ -94,7 +95,7 @@
             this.thing_to_search.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.thing_to_search.Size = new System.Drawing.Size(201, 21);
             this.thing_to_search.TabIndex = 6;
-           // 
+            // 
             // house_no
             // 
             this.house_no.Location = new System.Drawing.Point(258, 40);
@@ -123,7 +124,7 @@
             this.list_of_people.Items.AddRange(new object[] {
             "Komornika",
             "Sądu",
-            "Prokuratory",
+            "Prokuratury",
             "Jednostki Policji",
             "Urzędu Skarbowego",
             "ZUS/KRUS"});
@@ -137,9 +138,9 @@
             // result_button
             // 
             this.result_button.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.result_button.Location = new System.Drawing.Point(14, 126);
+            this.result_button.Location = new System.Drawing.Point(14, 155);
             this.result_button.Name = "result_button";
-            this.result_button.Size = new System.Drawing.Size(300, 44);
+            this.result_button.Size = new System.Drawing.Size(302, 45);
             this.result_button.TabIndex = 7;
             this.result_button.Text = "Pokaż wyniki";
             this.result_button.UseVisualStyleBackColor = true;
@@ -147,7 +148,7 @@
             // 
             // Res2
             // 
-            this.Res2.Location = new System.Drawing.Point(14, 99);
+            this.Res2.Location = new System.Drawing.Point(15, 128);
             this.Res2.Name = "Res2";
             this.Res2.Size = new System.Drawing.Size(93, 21);
             this.Res2.TabIndex = 8;
@@ -166,10 +167,20 @@
             "Pracownicza",
             "Administracyjna",
             "Księgi Wieczyste"});
-            this.sady_combo.Location = new System.Drawing.Point(113, 99);
+            this.sady_combo.Location = new System.Drawing.Point(114, 128);
             this.sady_combo.Name = "sady_combo";
             this.sady_combo.Size = new System.Drawing.Size(201, 21);
             this.sady_combo.TabIndex = 9;
+            // 
+            // CBoxSpecial
+            // 
+            this.CBoxSpecial.Location = new System.Drawing.Point(114, 97);
+            this.CBoxSpecial.Name = "CBoxSpecial";
+            this.CBoxSpecial.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.CBoxSpecial.Size = new System.Drawing.Size(200, 22);
+            this.CBoxSpecial.TabIndex = 10;
+            this.CBoxSpecial.Text = "Uwzględnij specjalne jednostki";
+            this.CBoxSpecial.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -178,6 +189,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(691, 343);
+            this.Controls.Add(this.CBoxSpecial);
             this.Controls.Add(this.sady_combo);
             this.Controls.Add(this.Res2);
             this.Controls.Add(this.house_no);
@@ -210,6 +222,7 @@
         private System.Windows.Forms.Button result_button;
         private System.Windows.Forms.Label Res2;
         private System.Windows.Forms.ComboBox sady_combo;
+        private System.Windows.Forms.CheckBox CBoxSpecial;
     }
 }
 

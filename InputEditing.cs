@@ -37,7 +37,7 @@ namespace CustomExtensions
                 count++;
                 it++;
             }
-            return (count >= key.Length * 0.7);
+            return (count >= key.Length * 0.9);
             
         }
         public static bool FindHouse(string no, string odd, string even)
