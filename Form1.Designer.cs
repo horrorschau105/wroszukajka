@@ -127,7 +127,7 @@
             "Prokuratury",
             "Jednostki Policji",
             "Urzędu Skarbowego",
-            "ZUS/KRUS"});
+            "Oddziału ZUSu"});
             this.list_of_people.Location = new System.Drawing.Point(113, 69);
             this.list_of_people.Name = "list_of_people";
             this.list_of_people.RightToLeft = System.Windows.Forms.RightToLeft.No;
