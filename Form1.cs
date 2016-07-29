@@ -119,6 +119,28 @@ namespace dlakamilka
                         }
                     }
                     break;
+                case 3:
+                    foreach (XElement data in all_answers)
+                    {
+                        KeyValuePair<string, string> t =
+                            new KeyValuePair<string, string>((string)data.Element("dzielnica"), (string)data.Element("extend"));
+                        set.Add(t);
+                    }
+                    if (CBoxSpecial.Checked) set.Add(new KeyValuePair<string, string>("None", "None"));
+                    rslt.listViewOfResults.AddManyColumns("Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
+                    foreach (KeyValuePair<string, string> district in set)
+                    {
+                        var partial = from row in rslt.policja.baza.Elements()
+                                      where ((string)row.Element("dzielnica") == district.Key
+                                            && (string)row.Element("extend") == district.Value)
+                                      select row;
+                        foreach (XElement x in partial)
+                        {
+                            rslt.listViewOfResults.Items.
+                                Add(new ListViewItem(x.GetRowFromNode("coto", "miasto", "ulica", "kodpocztowy", "telefon1", "telefon2")));
+                        }
+                    }
+                    break;
                 case 4: // SKARBOWKA
                     foreach (XElement data in all_answers)
                     {
