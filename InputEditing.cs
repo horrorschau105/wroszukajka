@@ -1,7 +1,16 @@
 ﻿using System.Windows.Forms;
 using System.Xml.Linq;
+using System.Collections;
 namespace CustomExtensions
 {
+    public class Set : ArrayList
+    {
+        public override int Add(object toAdd)
+        {
+            if (!this.Contains(toAdd)) base.Add(toAdd);
+            return 1;
+        }
+    }
     public static class StringExtension
     {
         public static bool IsNullOrEmpty(this string str)
@@ -43,8 +52,9 @@ namespace CustomExtensions
         public static bool FindHouse(string no, string odd, string even)
         {
         if (no.IsNullOrEmpty()) return true;
-        if (no[0] % 2 == 0 && even != "n") return true;
-        else if (no[0] % 2 == 1 && odd != "n") return true;
+        char last = no[no.Length - 1];
+        if (last % 2 == 0 && even != "n") return true;
+        else if (last % 2 == 1 && odd != "n") return true;
         return false;
         }
     }

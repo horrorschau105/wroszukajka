@@ -11,12 +11,13 @@ namespace dlakamilka
 {
     public partial class Results : Form
     {
-        public MyBase komornicy, prokuratura;
+        public MyBase komornicy, prokuratura, skarbowka;
         public Results()
         {
             InitializeComponent();
             komornicy = new MyBase("wroclaw_komornicy.xml");
             prokuratura = new MyBase("wroclaw_prokuratura.xml");
+            skarbowka = new MyBase("wroclaw_urzadskarbowy.xml");
         }
     }
 }

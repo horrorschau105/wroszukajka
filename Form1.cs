@@ -34,18 +34,13 @@ namespace dlakamilka
                          where ((string)row.Element("nazwa_ulicy")).Similar(key)
                          && StringExtension.FindHouse(house_no.Text, (string)row.Element("nieparzyste"), (string)row.Element("parzyste"))
                          select row;
-                form1_listview.AddManyColumns("Ulica", "Dzielnica", "Osiedle");
+                form1_listview.AddManyColumns("Ulica", "Dzielnica", "Osiedle", "parzyste", "nieparzyste");
             }
-            else if (thing_to_search.SelectedIndex == 1)
-            {
-                form1_listview.AddManyColumns("Kod", "Miasto", "Lokalizacja");
-                // cos tu kiedys wrzucimy
-             }
             if (!rsltat.Any()) label_for_notfound.Show();
             else label_for_notfound.Hide();
             foreach(var p in rsltat)
             {
-                form1_listview.Items.Add(new ListViewItem(p.GetRowFromNode("nazwa_ulicy", "dzielnica", "osiedle")));
+                form1_listview.Items.Add(new ListViewItem(p.GetRowFromNode("nazwa_ulicy", "dzielnica", "osiedle", "parzyste", "nieparzyste")));
             }
             all_answers = rsltat;
         }
@@ -121,6 +116,26 @@ namespace dlakamilka
                         {
                             rslt.listViewOfResults.Items.
                                 Add(new ListViewItem(x.GetRowFromNode("coto", "miasto", "ulica", "kodpocztowy",  "telefon1" , "telefon2")));
+                        }
+                    }
+                    break;
+                case 4: // SKARBOWKA
+                    foreach (XElement data in all_answers)
+                    {
+                        var district = (string)data.Element("dzielnica");
+                        set.Add(district);
+                    }
+                    if (CBoxSpecial.Checked) set.Add("None");
+                    rslt.listViewOfResults.AddManyColumns("Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
+                    foreach (string district in set)
+                    {
+                        var partial = from row in rslt.skarbowka.baza.Elements()
+                                      where (string)row.Element("dzielnica") == district
+                                      select row;
+                        foreach (XElement x in partial)
+                        {
+                            rslt.listViewOfResults.Items.
+                                Add(new ListViewItem(x.GetRowFromNode("coto", "miasto", "ulica", "kodpocztowy", "telefon1", "telefon2")));
                         }
                     }
                     break;
