@@ -161,32 +161,28 @@ namespace dlakamilka
                         }
                     }
                     break;
-                case 5: // ZUS - mały rozpierdziel
-                    // dostajemy na twarz listę dzielnica+osiedle
-                    // dla każdej pary z powyzszego wybieramy oddzial zusu
-                    // wywalamy dane kazdego oddzialu
+                case 5: // ZUS
                     foreach (XElement data in all_answers)
                     {
                         KeyValuePair<string, string> place = new KeyValuePair<string, string>((string)data.Element("dzielnica"), (string)data.Element("osiedle"));
                         set.Add(place);
                     }
                     rslt.listViewOfResults.AddManyColumns("Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon");
+                    Set rows = new Set();
                     foreach(KeyValuePair<string, string> pair in set)
                     {
-                        var partial = from row in rslt.zus.baza.Elements()
-                                      where (string)row.Element("dzielnica") == pair.Key && (string)row.Element("osiedle") == pair.Value &&
-                                      select (string)row.Element("coto");
-                        /*partial = partial.Distinct(); // wtf
-                        var full = from name in partial
-                                   from row in rslt.zus.baza.Elements()
-                                   where (string)row.Element("coto") == name
-                                   select row;
+                        var partial = 
+                            from row in (from row in rslt.zus.baza.Elements()
+                                where (string)row.Element("dzielnica") == pair.Key 
+                                    && (string)row.Element("osiedle") == pair.Value
+                                select row)
+                            where rows.AddIfNotIn((string)row.Element("coto"))
+                            select row; // no nieźle
                         foreach(XElement x in partial)
                         {
                             rslt.listViewOfResults.Items.Add(new ListViewItem(x.GetRowFromNode("coto", "miasto", "ulica", "kodpocztowy", "telefon")));
-                        }*/
+                        }
                     }
-
                     break;
                 default:
                     MessageBox.Show("pusto!");

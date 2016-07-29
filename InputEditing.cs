@@ -10,6 +10,12 @@ namespace CustomExtensions
             if (!this.Contains(toAdd)) base.Add(toAdd);
             return 1;
         }
+        public bool AddIfNotIn(object toAdd)
+        {
+            if (this.Contains(toAdd)) return false;
+            this.Add(toAdd);
+            return true;
+        }
     }
     public static class StringExtension
     {
