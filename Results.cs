@@ -11,7 +11,7 @@ namespace dlakamilka
 {
     public partial class Results : Form
     {
-        public MyBase komornicy, prokuratura, skarbowka, policja, zus;
+        public MyBase komornicy, prokuratura, skarbowka, policja, zus, sady;
         public Results()
         {
             InitializeComponent();
@@ -20,6 +20,7 @@ namespace dlakamilka
             skarbowka = new MyBase("wroclaw_urzadskarbowy.xml");
             policja = new MyBase("wroclaw_policja.xml");
             zus = new MyBase("wroclaw_zus.xml");
+            sady = new MyBase("wroclaw_sady.xml");
         }
     }
 }

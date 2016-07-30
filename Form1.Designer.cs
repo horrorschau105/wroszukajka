@@ -160,13 +160,12 @@
             this.sady_combo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.sady_combo.FormattingEnabled = true;
             this.sady_combo.Items.AddRange(new object[] {
-            "Cywilna",
-            "Karna",
-            "Rodzinna",
-            "Gospodarcza",
-            "Pracownicza",
-            "Administracyjna",
-            "Księgi Wieczyste"});
+            "cywilna",
+            "karna",
+            "rodzinna",
+            "gospodarcza",
+            "pracownicza",
+            "księgi wieczyste"});
             this.sady_combo.Location = new System.Drawing.Point(114, 128);
             this.sady_combo.Name = "sady_combo";
             this.sady_combo.Size = new System.Drawing.Size(201, 21);

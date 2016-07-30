@@ -75,13 +75,14 @@ namespace CustomExtensions
     }
     public static class ListViewExtension
     {
-        public static void AddManyColumns(this ListView listview, params string[] columns)
+        public static void AddManyColumns(this ListView listview, bool IfLastLarge, params string[] columns)
         {
             listview.View = View.Details;
             foreach (string col in columns)
             {
                 listview.Columns.Add(col, listview.Width / columns.Length, HorizontalAlignment.Center);
             }
+            if (IfLastLarge) listview.Columns[listview.Columns.Count - 1].Width = listview.Width;
         }
     }
     public static class XElementExtension

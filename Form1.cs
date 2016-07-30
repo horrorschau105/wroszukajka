@@ -17,6 +17,7 @@ namespace dlakamilka
             ulice = new MyBase("wroclaw_ulice.xml");
             thing_to_search.SelectedIndex = 0; // ustawienie poczatkowych wartosci comboboxow
             list_of_people.SelectedIndex = 0;
+            sady_combo.SelectedIndex = 0;
             label_for_notfound.Text = "Not found";
         }
         private void button1_Click(object sender, EventArgs e)
@@ -34,7 +35,7 @@ namespace dlakamilka
                          where ((string)row.Element("nazwa_ulicy")).Similar(key)
                          && StringExtension.FindHouse(house_no.Text, (string)row.Element("nieparzyste"), (string)row.Element("parzyste"))
                          select row;
-                form1_listview.AddManyColumns("Ulica", "Dzielnica", "Osiedle", "parzyste", "nieparzyste");
+                form1_listview.AddManyColumns(false,"Ulica", "Dzielnica", "Osiedle", "parzyste", "nieparzyste");
             }
             if (!rsltat.Any()) label_for_notfound.Show();
             else label_for_notfound.Hide();
@@ -53,7 +54,6 @@ namespace dlakamilka
             if (list_of_people.SelectedIndex == 1)
             {
                 sady_combo.Show();
-                sady_combo.SelectedIndex = 0;
                 Res2.Show();
             }
             else
@@ -66,7 +66,7 @@ namespace dlakamilka
         {
             rslt = new Results();
             Set set = new Set();
-            if(all_answers == null)
+            if(all_answers == null && list_of_people.SelectedIndex != 1)
             {
                 MessageBox.Show("Daj no jakiś input!");
                 return;
@@ -84,7 +84,7 @@ namespace dlakamilka
                         else if (district == "Stare Miasto") set.Add("Śródmieście");
                         else set.Add(district);
                     }
-                    rslt.listViewOfResults.AddManyColumns("Imie", "Nazwisko", "Adres", "Kod pocztowy", "Miasto");
+                    rslt.listViewOfResults.AddManyColumns(false,"Imie", "Nazwisko", "Dzielnica", "Adres", "Kod pocztowy", "Miasto");
                     foreach (string district in set)
                     {
                         var partial = from row in rslt.komornicy.baza.Elements()
@@ -93,8 +93,19 @@ namespace dlakamilka
                         foreach (XElement x in partial)
                         {
                             rslt.listViewOfResults.Items.
-                                Add(new ListViewItem(x.GetRowFromNode("imie", "nazwisko", "adres", "kodpocztowy", "miasto")));
+                                Add(new ListViewItem(x.GetRowFromNode("imie", "nazwisko", "dzielnica", "adres", "kodpocztowy", "miasto")));
                         }
+                    }
+                    break;
+                case 1: // SADY, nieczułe na ulicę
+                    var res = from row in rslt.sady.baza.Elements()
+                              where (string)row.Element("rodzajsprawy") == (string)sady_combo.Items[sady_combo.SelectedIndex]
+                              select row;
+                    rslt.listViewOfResults.AddManyColumns(true,"Instytucja", "Wydział", "Adres", "Kod pocztowy", "Miasto", "Objaśnienie");
+                    foreach (XElement x in res)
+                    {
+                        rslt.listViewOfResults.Items.
+                            Add(new ListViewItem(x.GetRowFromNode("coto", "wydzial", "ulica", "kodpocztowy", "miasto", "objasnienie")));
                     }
                     break;
                 case 2: // PROKURATURY
@@ -105,7 +116,7 @@ namespace dlakamilka
                         set.Add(t);
                     }
                     if (CBoxSpecial.Checked) set.Add(new KeyValuePair<string, string>("None", "None"));
-                    rslt.listViewOfResults.AddManyColumns("Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
+                    rslt.listViewOfResults.AddManyColumns(false,"Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
                     foreach (KeyValuePair<string, string> district in set)
                     {
                         var partial = from row in rslt.prokuratura.baza.Elements()
@@ -127,7 +138,7 @@ namespace dlakamilka
                         set.Add(t);
                     }
                     if (CBoxSpecial.Checked) set.Add(new KeyValuePair<string, string>("None", "None"));
-                    rslt.listViewOfResults.AddManyColumns("Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
+                    rslt.listViewOfResults.AddManyColumns(false,"Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
                     foreach (KeyValuePair<string, string> district in set)
                     {
                         var partial = from row in rslt.policja.baza.Elements()
@@ -148,7 +159,7 @@ namespace dlakamilka
                         set.Add(district);
                     }
                     if (CBoxSpecial.Checked) set.Add("None");
-                    rslt.listViewOfResults.AddManyColumns("Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
+                    rslt.listViewOfResults.AddManyColumns(false,"Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
                     foreach (string district in set)
                     {
                         var partial = from row in rslt.skarbowka.baza.Elements()
@@ -167,7 +178,7 @@ namespace dlakamilka
                         KeyValuePair<string, string> place = new KeyValuePair<string, string>((string)data.Element("dzielnica"), (string)data.Element("osiedle"));
                         set.Add(place);
                     }
-                    rslt.listViewOfResults.AddManyColumns("Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon");
+                    rslt.listViewOfResults.AddManyColumns(false,"Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon");
                     Set rows = new Set();
                     foreach(KeyValuePair<string, string> pair in set)
                     {

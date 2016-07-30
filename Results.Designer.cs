@@ -34,8 +34,10 @@
             // 
             // listViewOfResults
             // 
+            this.listViewOfResults.AllowColumnReorder = true;
             this.listViewOfResults.Location = new System.Drawing.Point(12, 64);
             this.listViewOfResults.Name = "listViewOfResults";
+            this.listViewOfResults.ShowItemToolTips = true;
             this.listViewOfResults.Size = new System.Drawing.Size(922, 314);
             this.listViewOfResults.TabIndex = 0;
             this.listViewOfResults.UseCompatibleStateImageBehavior = false;
