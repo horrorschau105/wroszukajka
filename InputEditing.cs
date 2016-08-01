@@ -1,6 +1,22 @@
 ﻿using System.Windows.Forms;
+using System.Xml.Linq;
+using System.Collections;
 namespace CustomExtensions
 {
+    public class Set : ArrayList
+    {
+        public override int Add(object toAdd)
+        {
+            if (!this.Contains(toAdd)) base.Add(toAdd);
+            return 1;
+        }
+        public bool AddIfNotIn(object toAdd)
+        {
+            if (this.Contains(toAdd)) return false;
+            this.Add(toAdd);
+            return true;
+        }
+    }
     public static class StringExtension
     {
         public static bool IsNullOrEmpty(this string str)
@@ -36,14 +52,15 @@ namespace CustomExtensions
                 count++;
                 it++;
             }
-            return (count >= key.Length * 0.7);
+            return (count >= key.Length * 0.9);
             
         }
         public static bool FindHouse(string no, string odd, string even)
         {
         if (no.IsNullOrEmpty()) return true;
-        if (no[0] % 2 == 0 && even != "n") return true;
-        else if (no[0] % 2 == 1 && odd != "n") return true;
+        char last = no[no.Length - 1];
+        if (last % 2 == 0 && even != "n") return true;
+        else if (last % 2 == 1 && odd != "n") return true;
         return false;
         }
     }
@@ -58,13 +75,26 @@ namespace CustomExtensions
     }
     public static class ListViewExtension
     {
-        public static void AddManyColumns(ListView listview, params string[] columns)
+        public static void AddManyColumns(this ListView listview, bool IfLastLarge, params string[] columns)
         {
             listview.View = View.Details;
             foreach (string col in columns)
             {
                 listview.Columns.Add(col, listview.Width / columns.Length, HorizontalAlignment.Center);
             }
+            if (IfLastLarge) listview.Columns[listview.Columns.Count - 1].Width = listview.Width;
+        }
+    }
+    public static class XElementExtension
+    {
+        public static string[] GetRowFromNode(this XElement xelement, params string[] columns)
+        {
+            string[] result = new string[columns.Length];
+            for (int i = 0; i < columns.Length; ++i)
+            {
+                result[i] = (string)xelement.Element(columns[i]);
+            }
+            return result;
         }
     }
 }

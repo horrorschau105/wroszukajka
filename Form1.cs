@@ -10,12 +10,14 @@ namespace dlakamilka
     {
         public MyBase ulice;
         public Results rslt;
+        public IEnumerable<XElement> all_answers; // by miec zawsze całą listę z bazą, zamiast poszczególnych kolumn
         public Form1()
         {
             InitializeComponent();
             ulice = new MyBase("wroclaw_ulice.xml");
             thing_to_search.SelectedIndex = 0; // ustawienie poczatkowych wartosci comboboxow
             list_of_people.SelectedIndex = 0;
+            sady_combo.SelectedIndex = 0;
             label_for_notfound.Text = "Not found";
         }
         private void button1_Click(object sender, EventArgs e)
@@ -33,42 +35,15 @@ namespace dlakamilka
                          where ((string)row.Element("nazwa_ulicy")).Similar(key)
                          && StringExtension.FindHouse(house_no.Text, (string)row.Element("nieparzyste"), (string)row.Element("parzyste"))
                          select row;
-                ListViewExtension.AddManyColumns(form1_listview, "Ulica", "Dzielnica", "Osiedle");
+                form1_listview.AddManyColumns(false,"Ulica", "Dzielnica", "Osiedle", "parzyste", "nieparzyste");
             }
-            else if (thing_to_search.SelectedIndex == 1)
-            {
-                ListViewExtension.AddManyColumns(form1_listview, "Kod", "Miasto", "Lokalizacja");
-                // cos tu kiedys wrzucimy
-             }
             if (!rsltat.Any()) label_for_notfound.Show();
             else label_for_notfound.Hide();
             foreach(var p in rsltat)
             {
-                form1_listview.Items.Add(new ListViewItem(make_table(p, "nazwa_ulicy", "dzielnica", "osiedle")));
+                form1_listview.Items.Add(new ListViewItem(p.GetRowFromNode("nazwa_ulicy", "dzielnica", "osiedle", "parzyste", "nieparzyste")));
             }
-        }
-        private string[] make_table(XElement p,params string[] list) /// uuuuu, wo seid ihr?
-        {
-            string[] result = new string[list.Length];
-            for(int i=0;i<list.Length;++i)
-            {
-                result[i] = (string)p.Element(list[i]);
-            }
-            return result;
-        }
-       private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (thing_to_search.SelectedIndex == 0)
-            {
-                house_no.Show();
-                main_input.SetBounds(main_input.Location.X, main_input.Location.Y, 190, main_input.Size.Height);
-                // to boli
-            }
-            if (thing_to_search.SelectedIndex == 1)
-            {
-                house_no.Hide();
-                main_input.SetBounds(main_input.Location.X, main_input.Location.Y, 243, main_input.Size.Height);
-            }
+            all_answers = rsltat;
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -90,29 +65,141 @@ namespace dlakamilka
         private void button2_Click(object sender, EventArgs e)
         {
             rslt = new Results();
-            rslt.Show();
             Set set = new Set();
-            foreach (ListViewItem data in form1_listview.Items)
+            if(all_answers == null && list_of_people.SelectedIndex != 1)
             {
-                // Psie pole podlega tutaj pod Fabryczną, a Stare Miasto pod Śródmieście, stąd zmiany
-                if (data.SubItems[1].Text == "Psie Pole") set.Add("Fabryczna");
-                else if (data.SubItems[1].Text == "Stare Miasto") set.Add("Śródmieście");
-                else set.Add(data.SubItems[1].Text);
+                MessageBox.Show("Daj no jakiś input!");
+                return;
             }
-            ListViewExtension.
-                AddManyColumns(rslt.listViewOfResults, "Imie", "Nazwisko", "Adres", "Kod pocztowy", "Miasto");
-            foreach(string district in set)
+            rslt.Show();
+            rslt.NameLabel.Text = string.Format("Wyniki wyszukiwania {0}", list_of_people.Items[list_of_people.SelectedIndex]);
+            switch (list_of_people.SelectedIndex) 
             {
-                var partial = from row in rslt.komornicy.baza.Elements()
-                              where (string)row.Element("dzielnica") == district
+                case 0: // KOMORNICY
+                    foreach (XElement data in all_answers)
+                    {
+                        // Psie pole podlega tutaj pod Fabryczną, a Stare Miasto pod Śródmieście, stąd zmiany
+                        var district = (string)data.Element("dzielnica");
+                        if (district == "Psie Pole") set.Add("Fabryczna");
+                        else if (district == "Stare Miasto") set.Add("Śródmieście");
+                        else set.Add(district);
+                    }
+                    rslt.listViewOfResults.AddManyColumns(false,"Imie", "Nazwisko", "Dzielnica", "Adres", "Kod pocztowy", "Miasto");
+                    foreach (string district in set)
+                    {
+                        var partial = from row in rslt.komornicy.baza.Elements()
+                                      where (string)row.Element("dzielnica") == district
+                                      select row;
+                        foreach (XElement x in partial)
+                        {
+                            rslt.listViewOfResults.Items.
+                                Add(new ListViewItem(x.GetRowFromNode("imie", "nazwisko", "dzielnica", "adres", "kodpocztowy", "miasto")));
+                        }
+                    }
+                    break;
+                case 1: // SADY, nieczułe na ulicę
+                    var res = from row in rslt.sady.baza.Elements()
+                              where (string)row.Element("rodzajsprawy") == (string)sady_combo.Items[sady_combo.SelectedIndex]
                               select row;
-                foreach(XElement x in partial)
-                {
-                    rslt.listViewOfResults.Items.
-                        Add(new ListViewItem(make_table(x, "imie", "nazwisko", "adres", "kodpocztowy", "miasto")));
-                } 
+                    rslt.listViewOfResults.AddManyColumns(true,"Instytucja", "Wydział", "Adres", "Kod pocztowy", "Miasto", "Objaśnienie");
+                    foreach (XElement x in res)
+                    {
+                        rslt.listViewOfResults.Items.
+                            Add(new ListViewItem(x.GetRowFromNode("coto", "wydzial", "ulica", "kodpocztowy", "miasto", "objasnienie")));
+                    }
+                    break;
+                case 2: // PROKURATURY
+                    foreach (XElement data in all_answers)
+                    {
+                        KeyValuePair<string, string> t = 
+                            new KeyValuePair<string, string>((string)data.Element("dzielnica"), (string)data.Element("extend"));
+                        set.Add(t);
+                    }
+                    if (CBoxSpecial.Checked) set.Add(new KeyValuePair<string, string>("None", "None"));
+                    rslt.listViewOfResults.AddManyColumns(false,"Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
+                    foreach (KeyValuePair<string, string> district in set)
+                    {
+                        var partial = from row in rslt.prokuratura.baza.Elements()
+                                      where ((string)row.Element("dzielnica") == district.Key 
+                                            && (string)row.Element("extend") == district.Value) 
+                                      select row;
+                        foreach (XElement x in partial)
+                        {
+                            rslt.listViewOfResults.Items.
+                                Add(new ListViewItem(x.GetRowFromNode("coto", "miasto", "ulica", "kodpocztowy",  "telefon1" , "telefon2")));
+                        }
+                    }
+                    break;
+                case 3:
+                    foreach (XElement data in all_answers)
+                    {
+                        KeyValuePair<string, string> t =
+                            new KeyValuePair<string, string>((string)data.Element("dzielnica"), (string)data.Element("extend"));
+                        set.Add(t);
+                    }
+                    if (CBoxSpecial.Checked) set.Add(new KeyValuePair<string, string>("None", "None"));
+                    rslt.listViewOfResults.AddManyColumns(false,"Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
+                    foreach (KeyValuePair<string, string> district in set)
+                    {
+                        var partial = from row in rslt.policja.baza.Elements()
+                                      where ((string)row.Element("dzielnica") == district.Key
+                                            && (string)row.Element("extend") == district.Value)
+                                      select row;
+                        foreach (XElement x in partial)
+                        {
+                            rslt.listViewOfResults.Items.
+                                Add(new ListViewItem(x.GetRowFromNode("coto", "miasto", "ulica", "kodpocztowy", "telefon1", "telefon2")));
+                        }
+                    }
+                    break;
+                case 4: // SKARBOWKA
+                    foreach (XElement data in all_answers)
+                    {
+                        var district = (string)data.Element("dzielnica");
+                        set.Add(district);
+                    }
+                    if (CBoxSpecial.Checked) set.Add("None");
+                    rslt.listViewOfResults.AddManyColumns(false,"Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
+                    foreach (string district in set)
+                    {
+                        var partial = from row in rslt.skarbowka.baza.Elements()
+                                      where (string)row.Element("dzielnica") == district
+                                      select row;
+                        foreach (XElement x in partial)
+                        {
+                            rslt.listViewOfResults.Items.
+                                Add(new ListViewItem(x.GetRowFromNode("coto", "miasto", "ulica", "kodpocztowy", "telefon1", "telefon2")));
+                        }
+                    }
+                    break;
+                case 5: // ZUS
+                    foreach (XElement data in all_answers)
+                    {
+                        KeyValuePair<string, string> place = new KeyValuePair<string, string>((string)data.Element("dzielnica"), (string)data.Element("osiedle"));
+                        set.Add(place);
+                    }
+                    rslt.listViewOfResults.AddManyColumns(false,"Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon");
+                    Set rows = new Set();
+                    foreach(KeyValuePair<string, string> pair in set)
+                    {
+                        var partial = 
+                            from row in (from row in rslt.zus.baza.Elements()
+                                where (string)row.Element("dzielnica") == pair.Key 
+                                    && (string)row.Element("osiedle") == pair.Value
+                                select row)
+                            where rows.AddIfNotIn((string)row.Element("coto"))
+                            select row; // no nieźle
+                        foreach(XElement x in partial)
+                        {
+                            rslt.listViewOfResults.Items.Add(new ListViewItem(x.GetRowFromNode("coto", "miasto", "ulica", "kodpocztowy", "telefon")));
+                        }
+                    }
+                    break;
+                default:
+                    MessageBox.Show("pusto!");
+                    break;
             }
-            
+
         }
     }
 }
