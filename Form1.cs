@@ -20,6 +20,12 @@ namespace dlakamilka
             sady_combo.SelectedIndex = 0;
             label_for_notfound.Text = "Not found";
         }
+        public static string komornicy(string district)
+        {
+            if (district == "Psie Pole") return "Fabryczna";
+            if (district == "Stare Miasto") return "Śródmieście";
+            return district;
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             input_TextChanged(sender, null); 
@@ -76,25 +82,16 @@ namespace dlakamilka
             switch (list_of_people.SelectedIndex) 
             {
                 case 0: // KOMORNICY
-                    foreach (XElement data in all_answers)
+                    rslt.listViewOfResults.AddManyColumns(false, "Imie", "Nazwisko", "Dzielnica", "Adres", "Kod pocztowy", "Miasto");
+                    var wtf = (from ans in all_answers
+                               join row in rslt.komornicy.baza.Elements()
+                               on komornicy((string)ans.Element("dzielnica")) equals (string)row.Element("dzielnica")
+                               select row).Distinct();                                
+                    // inner join kurwy - weszło!
+                    foreach (var x in wtf)
                     {
-                        // Psie pole podlega tutaj pod Fabryczną, a Stare Miasto pod Śródmieście, stąd zmiany
-                        var district = (string)data.Element("dzielnica");
-                        if (district == "Psie Pole") set.Add("Fabryczna");
-                        else if (district == "Stare Miasto") set.Add("Śródmieście");
-                        else set.Add(district);
-                    }
-                    rslt.listViewOfResults.AddManyColumns(false,"Imie", "Nazwisko", "Dzielnica", "Adres", "Kod pocztowy", "Miasto");
-                    foreach (string district in set)
-                    {
-                        var partial = from row in rslt.komornicy.baza.Elements()
-                                      where (string)row.Element("dzielnica") == district
-                                      select row;
-                        foreach (XElement x in partial)
-                        {
-                            rslt.listViewOfResults.Items.
-                                Add(new ListViewItem(x.GetRowFromNode("imie", "nazwisko", "dzielnica", "adres", "kodpocztowy", "miasto")));
-                        }
+                        rslt.listViewOfResults.Items.
+                            Add(new ListViewItem((x.GetRowFromNode("imie", "nazwisko", "dzielnica", "adres", "kodpocztowy", "miasto"))));
                     }
                     break;
                 case 1: // SADY, nieczułe na ulicę
