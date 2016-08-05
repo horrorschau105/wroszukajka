@@ -72,6 +72,7 @@ namespace dlakamilka
         {
             rslt = new Results();
             Set set = new Set();
+            IEnumerable<XElement> wtf;
             if(all_answers == null && list_of_people.SelectedIndex != 1)
             {
                 MessageBox.Show("Daj no jakiś input!");
@@ -83,22 +84,21 @@ namespace dlakamilka
             {
                 case 0: // KOMORNICY
                     rslt.listViewOfResults.AddManyColumns(false, "Imie", "Nazwisko", "Dzielnica", "Adres", "Kod pocztowy", "Miasto");
-                    var wtf = (from ans in all_answers
+                    wtf = (from ans in all_answers
                                join row in rslt.komornicy.baza.Elements()
                                on komornicy((string)ans.Element("dzielnica")) equals (string)row.Element("dzielnica")
                                select row).Distinct();                                
-                    // inner join kurwy - weszło!
-                    foreach (var x in wtf)
+                    foreach (XElement x in wtf)
                     {
                         rslt.listViewOfResults.Items.
                             Add(new ListViewItem((x.GetRowFromNode("imie", "nazwisko", "dzielnica", "adres", "kodpocztowy", "miasto"))));
                     }
                     break;
                 case 1: // SADY, nieczułe na ulicę
+                    rslt.listViewOfResults.AddManyColumns(true, "Instytucja", "Wydział", "Adres", "Kod pocztowy", "Miasto", "Objaśnienie");
                     var res = from row in rslt.sady.baza.Elements()
                               where (string)row.Element("rodzajsprawy") == (string)sady_combo.Items[sady_combo.SelectedIndex]
                               select row;
-                    rslt.listViewOfResults.AddManyColumns(true,"Instytucja", "Wydział", "Adres", "Kod pocztowy", "Miasto", "Objaśnienie");
                     foreach (XElement x in res)
                     {
                         rslt.listViewOfResults.Items.
@@ -106,6 +106,11 @@ namespace dlakamilka
                     }
                     break;
                 case 2: // PROKURATURY
+                    wtf = (from ans in all_answers
+                               join row in rslt.komornicy.baza.Elements()
+                               on komornicy((string)ans.Element("dzielnica")) equals (string)row.Element("dzielnica")
+                               select row).Distinct();
+
                     foreach (XElement data in all_answers)
                     {
                         KeyValuePair<string, string> t = 
