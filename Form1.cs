@@ -20,6 +20,12 @@ namespace dlakamilka
             sady_combo.SelectedIndex = 0;
             label_for_notfound.Text = "Not found";
         }
+        public static string komornicy(string district)
+        {
+            if (district == "Psie Pole") return "Fabryczna";
+            if (district == "Stare Miasto") return "Śródmieście";
+            return district;
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             input_TextChanged(sender, null); 
@@ -66,6 +72,7 @@ namespace dlakamilka
         {
             rslt = new Results();
             Set set = new Set();
+            IEnumerable<XElement> wtf;
             if(all_answers == null && list_of_people.SelectedIndex != 1)
             {
                 MessageBox.Show("Daj no jakiś input!");
@@ -76,32 +83,22 @@ namespace dlakamilka
             switch (list_of_people.SelectedIndex) 
             {
                 case 0: // KOMORNICY
-                    foreach (XElement data in all_answers)
+                    rslt.listViewOfResults.AddManyColumns(false, "Imie", "Nazwisko", "Dzielnica", "Adres", "Kod pocztowy", "Miasto");
+                    wtf = (from ans in all_answers
+                               join row in rslt.komornicy.baza.Elements()
+                               on komornicy((string)ans.Element("dzielnica")) equals (string)row.Element("dzielnica")
+                               select row).Distinct();                                
+                    foreach (XElement x in wtf)
                     {
-                        // Psie pole podlega tutaj pod Fabryczną, a Stare Miasto pod Śródmieście, stąd zmiany
-                        var district = (string)data.Element("dzielnica");
-                        if (district == "Psie Pole") set.Add("Fabryczna");
-                        else if (district == "Stare Miasto") set.Add("Śródmieście");
-                        else set.Add(district);
-                    }
-                    rslt.listViewOfResults.AddManyColumns(false,"Imie", "Nazwisko", "Dzielnica", "Adres", "Kod pocztowy", "Miasto");
-                    foreach (string district in set)
-                    {
-                        var partial = from row in rslt.komornicy.baza.Elements()
-                                      where (string)row.Element("dzielnica") == district
-                                      select row;
-                        foreach (XElement x in partial)
-                        {
-                            rslt.listViewOfResults.Items.
-                                Add(new ListViewItem(x.GetRowFromNode("imie", "nazwisko", "dzielnica", "adres", "kodpocztowy", "miasto")));
-                        }
+                        rslt.listViewOfResults.Items.
+                            Add(new ListViewItem((x.GetRowFromNode("imie", "nazwisko", "dzielnica", "adres", "kodpocztowy", "miasto"))));
                     }
                     break;
                 case 1: // SADY, nieczułe na ulicę
+                    rslt.listViewOfResults.AddManyColumns(true, "Instytucja", "Wydział", "Adres", "Kod pocztowy", "Miasto", "Objaśnienie");
                     var res = from row in rslt.sady.baza.Elements()
                               where (string)row.Element("rodzajsprawy") == (string)sady_combo.Items[sady_combo.SelectedIndex]
                               select row;
-                    rslt.listViewOfResults.AddManyColumns(true,"Instytucja", "Wydział", "Adres", "Kod pocztowy", "Miasto", "Objaśnienie");
                     foreach (XElement x in res)
                     {
                         rslt.listViewOfResults.Items.
@@ -109,6 +106,11 @@ namespace dlakamilka
                     }
                     break;
                 case 2: // PROKURATURY
+                    wtf = (from ans in all_answers
+                               join row in rslt.komornicy.baza.Elements()
+                               on komornicy((string)ans.Element("dzielnica")) equals (string)row.Element("dzielnica")
+                               select row).Distinct();
+
                     foreach (XElement data in all_answers)
                     {
                         KeyValuePair<string, string> t = 
