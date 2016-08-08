@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using CustomExtensions;
 using System.Linq;
 using System.Xml.Linq;
 namespace dlakamilka
@@ -71,7 +70,6 @@ namespace dlakamilka
         private void button2_Click(object sender, EventArgs e)
         {
             rslt = new Results();
-            Set set = new Set();
             IEnumerable<XElement> wtf;
             if(all_answers == null && list_of_people.SelectedIndex != 1)
             {
@@ -85,9 +83,11 @@ namespace dlakamilka
                 case 0: // KOMORNICY
                     rslt.listViewOfResults.AddManyColumns(false, "Imie", "Nazwisko", "Dzielnica", "Adres", "Kod pocztowy", "Miasto");
                     wtf = (from ans in all_answers
-                               join row in rslt.komornicy.baza.Elements()
-                               on komornicy((string)ans.Element("dzielnica")) equals (string)row.Element("dzielnica")
-                               select row).Distinct();                                
+                           join row in rslt.komornicy.baza.Elements()
+                           on komornicy((string)ans.Element("dzielnica")) equals (string)row.Element("dzielnica")
+                           select row)
+                               .Distinct()
+                               .OrderBy(row => (string)row.Element("nazwisko"));                             
                     foreach (XElement x in wtf)
                     {
                         rslt.listViewOfResults.Items.
@@ -96,105 +96,79 @@ namespace dlakamilka
                     break;
                 case 1: // SADY, nieczułe na ulicę
                     rslt.listViewOfResults.AddManyColumns(true, "Instytucja", "Wydział", "Adres", "Kod pocztowy", "Miasto", "Objaśnienie");
-                    var res = from row in rslt.sady.baza.Elements()
-                              where (string)row.Element("rodzajsprawy") == (string)sady_combo.Items[sady_combo.SelectedIndex]
-                              select row;
-                    foreach (XElement x in res)
+                    wtf = (from row in rslt.sady.baza.Elements()
+                           where (string)row.Element("rodzajsprawy") == (string)sady_combo.Items[sady_combo.SelectedIndex]
+                           select row)
+                                .OrderBy(row => (string)row.Element("coto"));
+                    foreach (XElement x in wtf)
                     {
                         rslt.listViewOfResults.Items.
                             Add(new ListViewItem(x.GetRowFromNode("coto", "wydzial", "ulica", "kodpocztowy", "miasto", "objasnienie")));
                     }
                     break;
                 case 2: // PROKURATURY
+                    rslt.listViewOfResults.AddManyColumns(false, "Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
                     wtf = (from ans in all_answers
-                               join row in rslt.komornicy.baza.Elements()
-                               on komornicy((string)ans.Element("dzielnica")) equals (string)row.Element("dzielnica")
-                               select row).Distinct();
-
-                    foreach (XElement data in all_answers)
+                           from t2 in rslt.prokuratura.baza.Elements().
+                           Where(prok => ((string)ans.Element("dzielnica") == (string)prok.Element("dzielnica")
+                           && (string)ans.Element("extend") == (string)prok.Element("extend"))
+                           || (CBoxSpecial.Checked && (string)prok.Element("extend") == "None"))
+                           .DefaultIfEmpty()
+                           select t2)
+                          .Distinct()
+                          .OrderBy(row => (string)row.Element("coto"));
+                    foreach (XElement x in wtf)
                     {
-                        KeyValuePair<string, string> t = 
-                            new KeyValuePair<string, string>((string)data.Element("dzielnica"), (string)data.Element("extend"));
-                        set.Add(t);
-                    }
-                    if (CBoxSpecial.Checked) set.Add(new KeyValuePair<string, string>("None", "None"));
-                    rslt.listViewOfResults.AddManyColumns(false,"Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
-                    foreach (KeyValuePair<string, string> district in set)
-                    {
-                        var partial = from row in rslt.prokuratura.baza.Elements()
-                                      where ((string)row.Element("dzielnica") == district.Key 
-                                            && (string)row.Element("extend") == district.Value) 
-                                      select row;
-                        foreach (XElement x in partial)
-                        {
-                            rslt.listViewOfResults.Items.
-                                Add(new ListViewItem(x.GetRowFromNode("coto", "miasto", "ulica", "kodpocztowy",  "telefon1" , "telefon2")));
-                        }
+                        rslt.listViewOfResults.Items.
+                            Add(new ListViewItem(x.GetRowFromNode("coto", "miasto", "ulica", "kodpocztowy", "telefon1", "telefon2")));
                     }
                     break;
-                case 3:
-                    foreach (XElement data in all_answers)
+                case 3:// POLICJA
+                    wtf = (from ans in all_answers
+                           from t2 in rslt.policja.baza.Elements().
+                           Where(row => ((string)ans.Element("dzielnica") == (string)row.Element("dzielnica")
+                           && (string)ans.Element("extend") == (string)row.Element("extend"))
+                           || (CBoxSpecial.Checked && (string)row.Element("extend") == "None"))
+                           .DefaultIfEmpty()
+                           select t2)
+                         .Distinct()
+                         .OrderBy(row => (string)row.Element("coto"));
+                    foreach (XElement x in wtf)
                     {
-                        KeyValuePair<string, string> t =
-                            new KeyValuePair<string, string>((string)data.Element("dzielnica"), (string)data.Element("extend"));
-                        set.Add(t);
-                    }
-                    if (CBoxSpecial.Checked) set.Add(new KeyValuePair<string, string>("None", "None"));
-                    rslt.listViewOfResults.AddManyColumns(false,"Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
-                    foreach (KeyValuePair<string, string> district in set)
-                    {
-                        var partial = from row in rslt.policja.baza.Elements()
-                                      where ((string)row.Element("dzielnica") == district.Key
-                                            && (string)row.Element("extend") == district.Value)
-                                      select row;
-                        foreach (XElement x in partial)
-                        {
-                            rslt.listViewOfResults.Items.
-                                Add(new ListViewItem(x.GetRowFromNode("coto", "miasto", "ulica", "kodpocztowy", "telefon1", "telefon2")));
-                        }
+                        rslt.listViewOfResults.Items.
+                            Add(new ListViewItem(x.GetRowFromNode("coto", "miasto", "ulica", "kodpocztowy", "telefon1", "telefon2")));
                     }
                     break;
                 case 4: // SKARBOWKA
-                    foreach (XElement data in all_answers)
+                    rslt.listViewOfResults.AddManyColumns(false, "Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
+                    wtf = (from ans in all_answers
+                           from t2 in rslt.skarbowka.baza.Elements().
+                           Where(row => ((string)ans.Element("dzielnica") == (string)row.Element("dzielnica"))
+                           || (CBoxSpecial.Checked && (string)row.Element("extend") == "None"))
+                           .DefaultIfEmpty()
+                           select t2)
+                         .Distinct()
+                         .OrderBy(row => (string)row.Element("coto"));
+                    foreach (XElement x in wtf)
                     {
-                        var district = (string)data.Element("dzielnica");
-                        set.Add(district);
-                    }
-                    if (CBoxSpecial.Checked) set.Add("None");
-                    rslt.listViewOfResults.AddManyColumns(false,"Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
-                    foreach (string district in set)
-                    {
-                        var partial = from row in rslt.skarbowka.baza.Elements()
-                                      where (string)row.Element("dzielnica") == district
-                                      select row;
-                        foreach (XElement x in partial)
-                        {
-                            rslt.listViewOfResults.Items.
-                                Add(new ListViewItem(x.GetRowFromNode("coto", "miasto", "ulica", "kodpocztowy", "telefon1", "telefon2")));
-                        }
+                        rslt.listViewOfResults.Items.
+                            Add(new ListViewItem(x.GetRowFromNode("coto", "miasto", "ulica", "kodpocztowy", "telefon1", "telefon2")));
                     }
                     break;
                 case 5: // ZUS
-                    foreach (XElement data in all_answers)
-                    {
-                        KeyValuePair<string, string> place = new KeyValuePair<string, string>((string)data.Element("dzielnica"), (string)data.Element("osiedle"));
-                        set.Add(place);
-                    }
                     rslt.listViewOfResults.AddManyColumns(false,"Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon");
-                    Set rows = new Set();
-                    foreach(KeyValuePair<string, string> pair in set)
+                    wtf = (from ans in all_answers
+                           from t2 in rslt.zus.baza.Elements().
+                           Where(row => ((string)ans.Element("dzielnica") == (string)row.Element("dzielnica") && (string)ans.Element("osiedle") == (string)row.Element("osiedle"))
+                           || (CBoxSpecial.Checked && (string)row.Element("extend") == "None"))
+                           .DefaultIfEmpty()
+                           select t2)
+                         .Distinct()
+                         .OrderBy(row => (string)row.Element("coto"));
+                    foreach (XElement x in wtf)
                     {
-                        var partial = 
-                            from row in (from row in rslt.zus.baza.Elements()
-                                where (string)row.Element("dzielnica") == pair.Key 
-                                    && (string)row.Element("osiedle") == pair.Value
-                                select row)
-                            where rows.AddIfNotIn((string)row.Element("coto"))
-                            select row; // no nieźle
-                        foreach(XElement x in partial)
-                        {
-                            rslt.listViewOfResults.Items.Add(new ListViewItem(x.GetRowFromNode("coto", "miasto", "ulica", "kodpocztowy", "telefon")));
-                        }
+                        rslt.listViewOfResults.Items.
+                            Add(new ListViewItem(x.GetRowFromNode("coto", "miasto", "ulica", "kodpocztowy", "telefon")));
                     }
                     break;
                 default:

@@ -1,23 +1,7 @@
 ﻿using System.Windows.Forms;
 using System.Xml.Linq;
-using System.Collections;
-namespace CustomExtensions
+namespace dlakamilka
 {
-    public class Set : ArrayList
-    {
-        public override int Add(object toAdd)
-        {
-            if (!this.Contains(toAdd)) base.Add(toAdd);
-            return 1;
-        }
-        public bool AddIfNotIn(object toAdd)
-        {
-            if (this.Contains(toAdd)) return false;
-            this.Add(toAdd);
-            return true;
-        }
-    }
-    
     public static class StringExtension
     {
         public static bool IsNullOrEmpty(this string str)
