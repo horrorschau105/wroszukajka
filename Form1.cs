@@ -71,6 +71,7 @@ namespace dlakamilka
         {
             rslt = new Results();
             IEnumerable<XElement> wtf;
+            rslt.label_komornicy.Hide();
             if(all_answers == null && list_of_people.SelectedIndex != 1)
             {
                 MessageBox.Show("Daj no jakiś input!");
@@ -82,6 +83,7 @@ namespace dlakamilka
             {
                 case 0: // KOMORNICY
                     rslt.listViewOfResults.AddManyColumns(false, "Imie", "Nazwisko", "Dzielnica", "Adres", "Kod pocztowy", "Miasto");
+                    rslt.label_komornicy.Show();
                     wtf = (from ans in all_answers
                            join row in rslt.komornicy.baza.Elements()
                            on komornicy((string)ans.Element("dzielnica")) equals (string)row.Element("dzielnica")
@@ -124,6 +126,7 @@ namespace dlakamilka
                     }
                     break;
                 case 3:// POLICJA
+                    rslt.listViewOfResults.AddManyColumns(false, "Instytucja", "Miasto", "Adres", "Kod pocztowy", "Telefon1", "Telefon2");
                     wtf = (from ans in all_answers
                            from t2 in rslt.policja.baza.Elements().
                            Where(row => ((string)ans.Element("dzielnica") == (string)row.Element("dzielnica")
