@@ -1,0 +1,91 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <prokuratura>
+    <coto>Prokuratura Rejonowa we Wrocławiu-Fabrycznej</coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>Fabryczna</dzielnica>
+    <extend>Fabryczna</extend>
+    <ulica>ul. Sądowa 2</ulica>
+    <telefon1>71 371 81 41</telefon1>
+    <telefon2>71 371 81 39</telefon2>
+    <kodpocztowy>50-046</kodpocztowy>
+    <special>Nie</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Prokuratura Rejonowa Wrocław-Krzyki Wschód</coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>Krzyki</dzielnica>
+    <extend>Wschód</extend>
+    <ulica>ul. Piłsudskiego 38B</ulica>
+    <telefon1>71 337 45 50</telefon1>
+    <telefon2>None</telefon2>
+    <kodpocztowy>50-033</kodpocztowy>
+    <special>Nie</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Prokuratura Rejonowa Wrocław-Krzyki Zachód</coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>Krzyki</dzielnica>
+    <extend>Zachód</extend>
+    <ulica>ul. Podwale 28</ulica>
+    <telefon1>71 364 67 64</telefon1>
+    <telefon2>71 364 67 61</telefon2>
+    <kodpocztowy>50-046</kodpocztowy>
+    <special>Nie</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Prokuratura Rejonowa Wrocław-Psie Pole</coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>Psie Pole</dzielnica>
+    <extend>Psie Pole</extend>
+    <ulica>ul. Podwale 28</ulica>
+    <telefon1>71 371 81 28</telefon1>
+    <telefon2>71 371 81 25</telefon2>
+    <kodpocztowy>50-046</kodpocztowy>
+    <special>Nie</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Prokuratura Rejonowa Wrocław-Stare Miasto</coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>Stare Miasto</dzielnica>
+    <extend>Stare Miasto</extend>
+    <ulica>ul. Sądowa 2</ulica>
+    <telefon1>71 371 81 52</telefon1>
+    <telefon2>71 371 81 50</telefon2>
+    <kodpocztowy>50-046</kodpocztowy>
+    <special>Nie</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Prokuratura Rejonowa dla Wrocławia-Śródmieścia</coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>Śródmieście</dzielnica>
+    <extend>Śródmieście</extend>
+    <ulica>ul. Podwale 28</ulica>
+    <telefon1>71 371 81 34</telefon1>
+    <telefon2>71 371 81 30</telefon2>
+    <kodpocztowy>50-046</kodpocztowy>
+    <special>Nie</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Wojskowa Prokuratura Garnizonowa we Wrocławiu </coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>None</dzielnica>
+    <extend>None</extend>
+    <ulica>Saperów 22/24 </ulica>
+    <telefon1>None</telefon1>
+    <telefon2>None</telefon2>
+    <kodpocztowy>50-984</kodpocztowy>
+    <special>Tak</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Prokuratura Okręgowa we Wrocławiu</coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>None</dzielnica>
+    <extend>None</extend>
+    <ulica>ul. Podwale 30</ulica>
+    <telefon1>71 371 81 14</telefon1>
+    <telefon2>None</telefon2>
+    <kodpocztowy>50-950</kodpocztowy>
+    <special>Tak</special>
+  </prokuratura>
+</DocumentElement>
