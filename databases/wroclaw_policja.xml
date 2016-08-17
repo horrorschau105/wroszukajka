@@ -1,0 +1,135 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <prokuratura>
+    <coto>Komenda Miejska Policji we Wrocławiu</coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>None</dzielnica>
+    <extend>None</extend>
+    <ulica>Sołtysowicka 21</ulica>
+    <telefon1>71 340 41 66</telefon1>
+    <telefon2>None</telefon2>
+    <kodpocztowy>51-168</kodpocztowy>
+    <special>Tak</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Komenda Miejska Policji we Wrocławiu</coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>None</dzielnica>
+    <extend>None</extend>
+    <ulica>Podwale 31-33</ulica>
+    <telefon1>71 340 41 66</telefon1>
+    <telefon2>None</telefon2>
+    <kodpocztowy>50-040</kodpocztowy>
+    <special>Tak</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Komisariat Policji Wrocław-Stare Miasto </coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>Stare Miasto</dzielnica>
+    <extend>Stare Miasto</extend>
+    <ulica>Trzemeska 12</ulica>
+    <telefon1>71 340 31 31</telefon1>
+    <telefon2>71 340 43 90</telefon2>
+    <kodpocztowy>53-679</kodpocztowy>
+    <special>Nie</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Komisariat Policji Wrocław-Ołbin</coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>Śródmieście</dzielnica>
+    <extend>Śródmieście</extend>
+    <ulica>Rydygiera 46</ulica>
+    <telefon1>71 328 96 18</telefon1>
+    <telefon2>71 340 43 06</telefon2>
+    <kodpocztowy>50-249</kodpocztowy>
+    <special>Nie</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Komisariat Policji Wrocław-Śródmieście </coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>Śródmieście</dzielnica>
+    <extend>Śródmieście</extend>
+    <ulica>Grunwaldzka 6</ulica>
+    <telefon1>71 340 43 58</telefon1>
+    <telefon2>71 322 22 17</telefon2>
+    <kodpocztowy>50-335</kodpocztowy>
+    <special>Nie</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Komisariat Policji Wrocław-Krzyki </coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>Krzyki</dzielnica>
+    <extend>Zachód</extend>
+    <ulica>Ślężna 115-129</ulica>
+    <telefon1>71 782 46 00</telefon1>
+    <telefon2>71 782 46 01</telefon2>
+    <kodpocztowy>53-305</kodpocztowy>
+    <special>Nie</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Komisariat Policji Wrocław-Rakowiec </coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>Krzyki</dzielnica>
+    <extend>Wschód</extend>
+    <ulica>Traugutta 94</ulica>
+    <telefon1>71 343 56 77</telefon1>
+    <telefon2>71 340 43 44</telefon2>
+    <kodpocztowy>50-420</kodpocztowy>
+    <special>Nie</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Komisariat Policji Wrocław-Fabryczna</coto>
+    <miasto>Wrocław </miasto>
+    <dzielnica>Fabryczna</dzielnica>
+    <extend>Fabryczna</extend>
+    <ulica>gen. Ivana Połbina 1</ulica>
+    <telefon1>71 351 02 13</telefon1>
+    <telefon2>71 340 43 80</telefon2>
+    <kodpocztowy>54-151</kodpocztowy>
+    <special>Nie</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Komisariat Policji Wrocław-Leśnica</coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>Fabryczna</dzielnica>
+    <extend>Fabryczna</extend>
+    <ulica>Średzka 42</ulica>
+    <telefon1>71 354 32 96</telefon1>
+    <telefon2>71 340 28 50</telefon2>
+    <kodpocztowy>54-017</kodpocztowy>
+    <special>Nie</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Komisariat Policji Wrocław-Grabiszynek </coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>Fabryczna</dzielnica>
+    <extend>Fabryczna</extend>
+    <ulica>Grabiszyńska 255</ulica>
+    <telefon1>71 363 14 21</telefon1>
+    <telefon2>71 340 41 16</telefon2>
+    <kodpocztowy>53-234</kodpocztowy>
+    <special>Nie</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Komisariat Policji Wrocław-Psie Pole</coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>Psie Pole</dzielnica>
+    <extend>Psie Pole</extend>
+    <ulica>plac Józefa Piłsudskiego 6/8</ulica>
+    <telefon1>71 340 46 05</telefon1>
+    <telefon2>71 340 45 25</telefon2>
+    <kodpocztowy>51-125</kodpocztowy>
+    <special>Nie</special>
+  </prokuratura>
+  <prokuratura>
+    <coto>Komisariat Policji Wrocław-Osiedle</coto>
+    <miasto>Wrocław</miasto>
+    <dzielnica>Psie Pole</dzielnica>
+    <extend>Psie Pole</extend>
+    <ulica>Kiełczowska 15</ulica>
+    <telefon1>71 345 78 94</telefon1>
+    <telefon2>71 340 28 20</telefon2>
+    <kodpocztowy>51-315</kodpocztowy>
+    <special>Nie</special>
+  </prokuratura>
+</DocumentElement>

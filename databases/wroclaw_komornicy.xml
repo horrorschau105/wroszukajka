@@ -1,0 +1,323 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <komornik>
+    <nazwisko>Wieczorek</nazwisko>
+    <imie>Tomasz</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Plac Teatralny 1/3</adres>
+    <kodpocztowy>50-051</kodpocztowy>
+    <dzielnica>Fabryczna</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Kinastowski</nazwisko>
+    <imie>Tomasz</imie>
+    <miasto>Wrocław</miasto>
+    <adres>Pl. Legionów 17/4</adres>
+    <kodpocztowy>50-047</kodpocztowy>
+    <dzielnica>Fabryczna</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Bagiński</nazwisko>
+    <imie>Radosław</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Świebodzka 6/10</adres>
+    <kodpocztowy>50-046</kodpocztowy>
+    <dzielnica>Fabryczna</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Krasiczyńska - Knuter</nazwisko>
+    <imie>Agata</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Inowrocławska 21/4</adres>
+    <kodpocztowy>53-653</kodpocztowy>
+    <dzielnica>Fabryczna</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Wojnar</nazwisko>
+    <imie>Artur Franciszek</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Komandorska 53A/6B</adres>
+    <kodpocztowy>53-342</kodpocztowy>
+    <dzielnica>Fabryczna</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Wacowski</nazwisko>
+    <imie>Radosław</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Jemiołowa 44 lok. 106</adres>
+    <kodpocztowy>53-447</kodpocztowy>
+    <dzielnica>Fabryczna</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Jankowski</nazwisko>
+    <imie>Maciej</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Zaporoska 39 nr I/1</adres>
+    <kodpocztowy>53-519</kodpocztowy>
+    <dzielnica>Fabryczna</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Jaworek</nazwisko>
+    <imie>Kamila</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Legnicka 62 pok. 108</adres>
+    <kodpocztowy>54-204</kodpocztowy>
+    <dzielnica>Fabryczna</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Urbaniak</nazwisko>
+    <imie>Piotr Paweł</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Mosiężna 35/1</adres>
+    <kodpocztowy>53-441</kodpocztowy>
+    <dzielnica>Fabryczna</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Kopeć</nazwisko>
+    <imie>Justyna Olga</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Ostrowskiego 7</adres>
+    <kodpocztowy>53-238</kodpocztowy>
+    <dzielnica>Fabryczna</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Podgórska</nazwisko>
+    <imie>Beata Anna</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Ostrowskiego 9 lok. 205</adres>
+    <kodpocztowy>53-238</kodpocztowy>
+    <dzielnica>Fabryczna</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Borkowski</nazwisko>
+    <imie>Bartosz Stefan</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Krakowska 52</adres>
+    <kodpocztowy>50-425</kodpocztowy>
+    <dzielnica>Krzyki</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Opielewicz</nazwisko>
+    <imie>Wojciech Rafał</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Lelewela 6a/3</adres>
+    <kodpocztowy>53-505</kodpocztowy>
+    <dzielnica>Krzyki</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Prus</nazwisko>
+    <imie>Stanisław</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Kościuszki 6/10</adres>
+    <kodpocztowy>50-038</kodpocztowy>
+    <dzielnica>Krzyki</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Strzałkowska</nazwisko>
+    <imie>Marzanna Maria</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Kościuszki 13/1B</adres>
+    <kodpocztowy>50-037</kodpocztowy>
+    <dzielnica>Krzyki</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Janus</nazwisko>
+    <imie>Agnieszka Patrycja</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Kukuczki 5 lok. 13</adres>
+    <kodpocztowy>50-570</kodpocztowy>
+    <dzielnica>Krzyki</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Morawiec</nazwisko>
+    <imie>Gabriela</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Gajowa 36/5</adres>
+    <kodpocztowy>50-519</kodpocztowy>
+    <dzielnica>Krzyki</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Rodakiewicz</nazwisko>
+    <imie>Adriana</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Powstańców Śląskich 134 pok. 6</adres>
+    <kodpocztowy>53-315</kodpocztowy>
+    <dzielnica>Krzyki</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Tarnowska</nazwisko>
+    <imie>Bożena</imie>
+    <miasto>Wrocław</miasto>
+    <adres>Al. Kasztanowa 3 A</adres>
+    <kodpocztowy>53-125</kodpocztowy>
+    <dzielnica>Krzyki</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Kapera</nazwisko>
+    <imie>Przemysław</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul.  Piłsudskiego 52/3</adres>
+    <kodpocztowy>50-033</kodpocztowy>
+    <dzielnica>Krzyki</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Machnik</nazwisko>
+    <imie>Agnieszka Aleksandra</imie>
+    <miasto>Wrocław</miasto>
+    <adres>Pl. Powstańców Śląskich 17a/220</adres>
+    <kodpocztowy>53-329</kodpocztowy>
+    <dzielnica>Krzyki</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Czapor-Mleczko</nazwisko>
+    <imie>Kamila Anna</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Armii Krajowej 10b/4</adres>
+    <kodpocztowy>50-541</kodpocztowy>
+    <dzielnica>Krzyki</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Szmydka</nazwisko>
+    <imie>Iwona</imie>
+    <miasto>Wrocław</miasto>
+    <adres>Al. Armii Krajowej 8a/6</adres>
+    <kodpocztowy>50-541</kodpocztowy>
+    <dzielnica>Krzyki</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Bułka</nazwisko>
+    <imie>Joanna Maria</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Borowska 272</adres>
+    <kodpocztowy>50-558</kodpocztowy>
+    <dzielnica>Krzyki</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Kosztowniak</nazwisko>
+    <imie>Piotr Jerzy</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Armii Krajowej 14/6</adres>
+    <kodpocztowy>50-541</kodpocztowy>
+    <dzielnica>Krzyki</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Tyrek-Ciesek</nazwisko>
+    <imie>Monika</imie>
+    <miasto>Wrocław</miasto>
+    <adres>Al. Armii Krajowej 12a/3</adres>
+    <kodpocztowy>50-541</kodpocztowy>
+    <dzielnica>Krzyki</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Pucko</nazwisko>
+    <imie>Anna</imie>
+    <miasto>Wrocław</miasto>
+    <adres>Al. Armii Krajowej 12a/3</adres>
+    <kodpocztowy>50-541</kodpocztowy>
+    <dzielnica>Krzyki</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Kapica</nazwisko>
+    <imie>Robert</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Włodkowica 10</adres>
+    <kodpocztowy>50-072</kodpocztowy>
+    <dzielnica>Śródmieście</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Modliński</nazwisko>
+    <imie>Marek Ludwik</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Piłsudskiego 3a/4</adres>
+    <kodpocztowy>50-048</kodpocztowy>
+    <dzielnica>Śródmieście</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Romanowski</nazwisko>
+    <imie>Roman Kazimierz</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Zielińskiego 39</adres>
+    <kodpocztowy>53-533</kodpocztowy>
+    <dzielnica>Śródmieście</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Kosztowniak</nazwisko>
+    <imie>Marek Marian</imie>
+    <miasto>Wrocław</miasto>
+    <adres>Pl. Orląt Lwowskich 20 E</adres>
+    <kodpocztowy>53-605</kodpocztowy>
+    <dzielnica>Śródmieście</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Kwolek</nazwisko>
+    <imie>Agata Katarzyna</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Św. Mikołaja 51/52</adres>
+    <kodpocztowy>50-127</kodpocztowy>
+    <dzielnica>Śródmieście</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Kargul</nazwisko>
+    <imie>Edyta</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Kościuszki 29</adres>
+    <kodpocztowy>50-011</kodpocztowy>
+    <dzielnica>Śródmieście</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Przybylska</nazwisko>
+    <imie>Elżbieta</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Bolesława Prusa 5a/5</adres>
+    <kodpocztowy>50-319</kodpocztowy>
+    <dzielnica>Śródmieście</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Podgórska-Pawełka</nazwisko>
+    <imie>Paulina</imie>
+    <miasto>Wrocław</miasto>
+    <adres>pl. Solny 16 III p.</adres>
+    <kodpocztowy>50-062</kodpocztowy>
+    <dzielnica>Śródmieście</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Piotrowski</nazwisko>
+    <imie>Maciej</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Kazimierza Wielkiego 29a</adres>
+    <kodpocztowy>50-077</kodpocztowy>
+    <dzielnica>Śródmieście</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Krasowski</nazwisko>
+    <imie>Jakub Jerzy</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Nowa 6</adres>
+    <kodpocztowy>50-082</kodpocztowy>
+    <dzielnica>Śródmieście</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Pachla</nazwisko>
+    <imie>Katarzyna Anna</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. Św. Mikołaja 13/1c</adres>
+    <kodpocztowy>50-128</kodpocztowy>
+    <dzielnica>Śródmieście</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Pawiłowicz</nazwisko>
+    <imie>Jacek</imie>
+    <miasto>Wrocław</miasto>
+    <adres>Pl. Muzealny 12/4</adres>
+    <kodpocztowy>50-035</kodpocztowy>
+    <dzielnica>Śródmieście</dzielnica>
+  </komornik>
+  <komornik>
+    <nazwisko>Mielnik</nazwisko>
+    <imie>Wojciech</imie>
+    <miasto>Wrocław</miasto>
+    <adres>ul. św. Mikołaja 13/1C</adres>
+    <kodpocztowy>50-128</kodpocztowy>
+    <dzielnica>Śródmieście</dzielnica>
+  </komornik>
+</DocumentElement>
