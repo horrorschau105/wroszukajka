@@ -98,6 +98,8 @@ namespace dlakamilka
                     break;
                 case 1: // SADY, nieczułe na ulicę
                     rslt.listViewOfResults.AddManyColumns(true, "Instytucja", "Wydział", "Adres", "Kod pocztowy", "Miasto", "Objaśnienie");
+                    rslt.label_komornicy.Text = "Kliknij na sąd aby przeczytać objaśnienie";
+                    rslt.label_komornicy.Show();
                     wtf = (from row in rslt.sady.baza.Elements()
                            where (string)row.Element("rodzajsprawy") == (string)sady_combo.Items[sady_combo.SelectedIndex]
                            select row)

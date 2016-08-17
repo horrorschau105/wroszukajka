@@ -37,12 +37,15 @@
             // listViewOfResults
             // 
             this.listViewOfResults.AllowColumnReorder = true;
+            this.listViewOfResults.FullRowSelect = true;
+            this.listViewOfResults.GridLines = true;
             this.listViewOfResults.Location = new System.Drawing.Point(12, 49);
             this.listViewOfResults.Name = "listViewOfResults";
             this.listViewOfResults.ShowItemToolTips = true;
             this.listViewOfResults.Size = new System.Drawing.Size(922, 251);
             this.listViewOfResults.TabIndex = 0;
             this.listViewOfResults.UseCompatibleStateImageBehavior = false;
+            this.listViewOfResults.SelectedIndexChanged += new System.EventHandler(this.listViewOfResults_SelectedIndexChanged);
             // 
             // NameLabel
             // 

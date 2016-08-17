@@ -4,6 +4,17 @@ namespace dlakamilka
     public partial class Results : Form
     {
         public MyBase komornicy, prokuratura, skarbowka, policja, zus, sady;
+
+        private void listViewOfResults_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (NameLabel.Text.Contains("du")) // #itgraduate
+            {
+                label_komornicy.Text = string.Format("Index: {0}", listViewOfResults.SelectedItems.Count);
+            }
+            
+            
+        }
+
         public Results()
         {
             InitializeComponent();

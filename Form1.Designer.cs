@@ -217,7 +217,7 @@
         public System.Windows.Forms.Label label_for_notfound;
         private System.Windows.Forms.ComboBox thing_to_search;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox list_of_people;
+        public System.Windows.Forms.ComboBox list_of_people;
         private System.Windows.Forms.Button result_button;
         private System.Windows.Forms.Label Res2;
         private System.Windows.Forms.ComboBox sady_combo;
